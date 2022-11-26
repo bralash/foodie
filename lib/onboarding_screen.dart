@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import './menu.dart';
+import 'partial/dot_indicator.dart';
+import 'partial/onboard_content.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
@@ -25,6 +28,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  void nextPage() {
+    if (_pageIndex != onBoardData.length - 1) {
+      _pageController.nextPage(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return Menu();
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -67,9 +88,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     width: 60,
                     child: ElevatedButton(
                       onPressed: () {
-                        _pageController.nextPage(
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.ease);
+                        nextPage();
                       },
                       style: ElevatedButton.styleFrom(shape: CircleBorder()),
                       child: Icon(Icons.arrow_right_alt),
@@ -79,30 +98,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               )
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class DotIndicator extends StatelessWidget {
-  const DotIndicator({
-    super.key,
-    this.isActive = false,
-  });
-
-  final bool isActive;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      height: isActive ? 12 : 4,
-      width: 4,
-      decoration: BoxDecoration(
-        color: isActive ? Color(0xff010824) : Color(0xff010824).withOpacity(0.4),
-        borderRadius: BorderRadius.all(
-          Radius.circular(12),
         ),
       ),
     );
@@ -134,48 +129,3 @@ final List<Onboard> onBoardData = [
       title: "Quick delivery",
       description: "Get your favorite meal delivered right to your door step!"),
 ];
-
-class OnboardContent extends StatelessWidget {
-  const OnboardContent({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.description,
-  });
-
-  final String image, title, description;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      // ignore: prefer_const_literals_to_create_immutables
-      children: [
-        Spacer(),
-        Image.asset(
-          image,
-          width: 320,
-        ),
-        Spacer(),
-        Text(
-          title,
-          style: GoogleFonts.quicksand(
-            color: Color(0xff010824),
-            fontWeight: FontWeight.w700,
-            fontSize: 28,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 16),
-        Text(
-          description,
-          style: GoogleFonts.quicksand(
-            color: Color(0xff898989),
-            fontWeight: FontWeight.w700,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        Spacer(),
-      ],
-    );
-  }
-}
