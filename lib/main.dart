@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+// import 'package:foodie/partial/onboard_content.dart';
+// import './onboarding_screen.dart';
 import './onboarding_screen.dart';
-
 void main() {
   runApp(const MyApp());
 }

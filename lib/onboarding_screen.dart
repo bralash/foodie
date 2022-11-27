@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import './menu.dart';
+// import 'package:google_fonts/google_fonts.dart';
+import './screens/home_screen.dart';
 import 'partial/dot_indicator.dart';
 import 'partial/onboard_content.dart';
 
@@ -40,9 +40,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) {
-            return Menu();
-          },
+          builder: (context) => HomeScreen(),
         ),
       );
     }
